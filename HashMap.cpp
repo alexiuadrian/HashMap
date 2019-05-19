@@ -1,5 +1,6 @@
 #include "HashMap.h"
 
-HashMap::HashMap() {
+template <class K, class V, class F>
+HashMap<K, V, F>::HashMap() {
 
 }
