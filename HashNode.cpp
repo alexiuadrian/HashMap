@@ -30,7 +30,7 @@ K HashNode<K, V>::getKey() {
 }
 
 template <class K, class V>
-HashNode<K, V> HashNode<K, V>::getNext() {
+HashNode<K, V>* HashNode<K, V>::getNext() {
     return this->_Next;
 }
 

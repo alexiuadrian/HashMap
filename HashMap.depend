@@ -1,16 +1,26 @@
 # depslib dependency file v1.0
-1558192330 source:c:\users\adi\desktop\github\hashmap\main.cpp
+1558649233 source:c:\users\adi\desktop\github\hashmap\main.cpp
 	<iostream>
 	"HashMap.h"
 
-1558205690 c:\users\adi\desktop\github\hashmap\hashmap.h
+1558648934 c:\users\adi\desktop\github\hashmap\hashmap.h
+	"HashNode.h"
+	"KeyHash.h"
 
-1558205730 source:c:\users\adi\desktop\github\hashmap\hashmap.cpp
+1558648918 source:c:\users\adi\desktop\github\hashmap\hashmap.cpp
 	"HashMap.h"
 
-1558268653 source:c:\users\adi\desktop\github\hashmap\hashnode.cpp
+1558649520 source:c:\users\adi\desktop\github\hashmap\hashnode.cpp
 	"HashNode.h"
 
-1558268704 c:\users\adi\desktop\github\hashmap\hashnode.h
+1558649499 c:\users\adi\desktop\github\hashmap\hashnode.h
 	<iostream>
+
+1558641015 source:c:\users\adi\desktop\github\hashmap\keyhash.cpp
+	"KeyHash.h"
+
+1558641006 c:\users\adi\desktop\github\hashmap\keyhash.h
+
+1558648918 c:\users\adi\desktop\github\hashmap\hashmap.cpp
+	"HashMap.h"
 

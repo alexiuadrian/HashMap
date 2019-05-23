@@ -9,7 +9,7 @@ public:
     HashNode(const HashNode&);
     V getValue();
     K getKey();
-    HashNode getNext();
+    HashNode* getNext();
     void setValue(V);
     void setKey(K);
     void setNext(HashNode*);
