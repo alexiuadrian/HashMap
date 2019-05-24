@@ -16,7 +16,7 @@ template <class K, class V>
 HashNode<K, V>::HashNode(const HashNode& h) {
     this->_Key = h._Key;
     this->_Value = h._Value;
-    this._Next = h.Next;
+    this->_Next = h._Next;
 }
 
 template <class K, class V>
@@ -48,3 +48,5 @@ template <class K, class V>
 void HashNode<K, V>::setNext(HashNode<K, V>* x) {
     this->_Next = x;
 }
+
+template class HashNode<int, int>;

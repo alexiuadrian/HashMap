@@ -6,6 +6,7 @@ HashMap<K, V, F>::HashMap() {
     this->_Prim = this->_Ultim = NULL;
     this->_Size = 0;
     */
+    _Size = 100;
     _M = new HashNode<K, V> *[_Size];
 }
 
@@ -13,9 +14,13 @@ template <class K, class V, class F>
 void HashMap<K, V, F>::push(const K& k, const V& v) {
     unsigned long funcVal = _F(k);
     HashNode<K, V> *aux = _M[funcVal];
+    HashNode<K, V> *last = NULL;
     int i = 0;
 
-    while(aux != NULL && aux->getNext() != NULL && aux->getKey() != k) {    //daca nu s-a terminat lista si daca nu s-a mai gasit cheia curenta
+    cout << funcVal << endl;
+
+    while(aux != NULL && aux->getKey() != k) {    //daca nu s-a terminat lista si daca nu s-a mai gasit cheia curenta
+        last = aux;
         aux = aux->getNext();
         i++;
     }
@@ -26,12 +31,12 @@ void HashMap<K, V, F>::push(const K& k, const V& v) {
             _M[funcVal] = aux;
         }
         else {      //altfel inserez la final
-            aux->setNext(aux);
+            last->setNext(aux);
         }
     }
 
 }
-/*
+
 template<class K, class V, class F>
 HashMap<K, V, F>::~HashMap() {
     for(int i = 0; i < _Size; i++) {
@@ -45,13 +50,15 @@ HashMap<K, V, F>::~HashMap() {
     }
     delete[] _M;
 }
-*/
+
 template<typename K, typename V, typename F>
 void HashMap<K, V, F>::remove(const K& k) {
     unsigned long funcVal = _F(k);
     HashNode<K, V> *aux = _M[funcVal];
     HashNode<K, V> *last = NULL;    //retin ultimul element din lista inainte de aux
     int i = 0;
+
+    cout << funcVal << endl;
 
     while(aux != NULL && aux->getKey() != k) {    //daca nu s-a terminat lista si daca nu s-a mai gasit cheia curenta
         last = aux;
@@ -74,20 +81,25 @@ void HashMap<K, V, F>::remove(const K& k) {
 }
 
 template <typename K, typename V, typename F>
-V HashMap<K, V, F>::get(const K& k, const V& v) {
+V HashMap<K, V, F>::get(const K& k) {
     unsigned long funcVal = _F(k);
     HashNode<K, V> *aux = _M[funcVal];
-
+/*
     if(aux == NULL) {   //daca nu exista cheia returnez NULL
+        cout << "KOD\n";
         return NULL;
     }
-
+*/
+    cout << funcVal << endl;
     while(aux != NULL) {    //altfel caut in lista pana il gasesc
-        if(aux->getValue() == v) {
+            cout << aux->getKey() << endl;
+        if(aux->getKey() == k) {
             return aux->getValue();
         }
         aux = aux->getNext();
     }
+
+    //return 1;
 }
 
 /*
@@ -107,3 +119,5 @@ HashMap<K, V, F>::~HashMap() {
     for(int i = 0)
 }
 */
+
+template class HashMap<int, int, KeyHash<int> >;
