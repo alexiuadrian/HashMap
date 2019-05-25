@@ -2,3 +2,6 @@ HashMap.cbp
 HashMap.layout
 bin/
 obj/
+README.md
+HashMap.depend
+.gitattributes
