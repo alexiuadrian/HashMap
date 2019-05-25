@@ -8,9 +8,11 @@ HashNode<K, V>::HashNode() {
 
 template <class K, class V>
 HashNode<K, V>::HashNode(const K& k, const V& v) {
-    this->_Key = k;
     this->_Value = v;
+    this->_Key = k;
+    this->_Next = NULL;
 }
+
 
 template <class K, class V>
 HashNode<K, V>::HashNode(const HashNode& h) {
@@ -20,17 +22,17 @@ HashNode<K, V>::HashNode(const HashNode& h) {
 }
 
 template <class K, class V>
-V HashNode<K, V>::getValue() {
+V HashNode<K, V>::getValue() const {
     return this->_Value;
 }
 
 template <class K, class V>
-K HashNode<K, V>::getKey() {
+K HashNode<K, V>::getKey () const {
     return this->_Key;
 }
 
 template <class K, class V>
-HashNode<K, V>* HashNode<K, V>::getNext() {
+HashNode<K, V>* HashNode<K, V>::getNext() const {
     return this->_Next;
 }
 

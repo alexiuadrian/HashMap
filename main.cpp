@@ -7,15 +7,11 @@ int main()
 {
     HashMap<int, int, KeyHash<int> > H;
     int p = 12, x = 13;
-    H.push(p, 1234);
-    H.push(x, 5678);
-    cout << H.get(p) << ' ' << H.get(x) << endl;
-    //H.remove(p);
-    H.remove(p);
-    cout << H.get(x) << endl;
-    //H.push(134, 1234);
-    //cout << H.get(134);
-    //H.push(2, 5678);
-    //H.push(3, 9101112);
+    H.push(x, 1234);
+    H.push(p, 12);
+    cout << H[x] << ' ' << H.getNrOfKeys() << endl;
+    vector<int> V = H.getVals(p);
+    cout << V[0] << endl;
+    cout << H;
     return 0;
 }

@@ -1,54 +1,48 @@
 #include "HashMap.h"
 
 template <class K, class V, class F>
-HashMap<K, V, F>::HashMap() {
-    _Size = 0;
-    _M = new HashNode<K, V> *[_Size];
-}
-
-template <class K, class V, class F>
 void HashMap<K, V, F>::push(const K& k, const V& v) {
-    unsigned long funcVal = _F(k);
-    HashNode<K, V> *aux = _M[funcVal];
+    unsigned long valFunc = _F(k);
     HashNode<K, V> *last = NULL;
-    int i = 0;
+    HashNode<K, V> *aux = _M[valFunc];
 
-    //cout << funcVal << endl;
-
-    while(aux != NULL && aux->getKey() != k) {    //daca nu s-a terminat lista si daca nu s-a mai gasit cheia curenta
+    while(aux != NULL && aux->getKey() != k) {
         last = aux;
         aux = aux->getNext();
-        i++;
     }
 
-/*
-    do {
-        i++;
-        last = aux;
-        aux = aux->getNext();
-    }while(aux != NULL && aux->getKey() != k);
-*/
-    if(aux == NULL) {   //daca s-a ajuns la finalul listei la cautare
+    if(aux == NULL) {
         aux = new HashNode<K, V>(k, v);
-        if(i == 0) {    //inserez la inceput daca nu mai e niciun element in lista
-            _M[funcVal] = aux;
+
+        if(last == NULL) {
+            _M[valFunc] = aux;
         }
-        else {      //altfel inserez la final
+        else {
             last->setNext(aux);
         }
     }
+    else if(last != NULL) {
+        HashNode<K, V> *aux1 = new HashNode<K, V>(k, v);
+        last->setNext(aux1);
+        aux1->setNext(aux);
+    }
 
+    if(valFunc > _Size) {
+        _Size = valFunc;
+    }
 }
 
 template<class K, class V, class F>
 HashMap<K, V, F>::~HashMap() {
-    for(int i = 0; i < _Size; i++) {
+    const int size = 111;
+
+    for(int i = 0; i < size; i++) {
         HashNode<K, V> *aux  = _M[i];
         HashNode<K, V> *aux2  = NULL;
         while(aux != NULL) {
             aux2 = aux;
-            delete aux2;
             aux = aux->getNext();
+            delete aux2;
         }
     }
     delete[] _M;
@@ -105,22 +99,84 @@ V HashMap<K, V, F>::get(const K& k) {
     //return 1;
 }
 
-/*
+
 template <class K, class V, class F>
 HashMap<K, V, F>::HashMap(const HashMap& x) {
-    HashNode<K, V>* p = _Prim;
-    for(int i = 0; i < this->_Size; ++i) {
+    this->_Size = x._Size;
 
+    for(int i = 0; i < this->_Size; ++i) {
+        push(x._M[i]->getKey(), x._M[i]->getValue());
     }
 
+    this->_F = x._F;
 }
-*/
 
-/*
+
 template <class K, class V, class F>
-HashMap<K, V, F>::~HashMap() {
-    for(int i = 0)
+HashMap<K, V, F> HashMap<K, V, F>::operator=(const HashMap& x) {
+    this->_Size = x._Size;
+
+    for(int i = 0; i < this->_Size; ++i) {
+        push(x._M[i]->getKey(), x._M[i]->getValue());
+    }
+
+    this->_F = x._F;
 }
-*/
+
+template <class K, class V, class F>
+V HashMap<K, V, F>::operator[](const K& k) {
+    unsigned long funcVal = _F(k);
+    HashNode<K, V> *aux = _M[funcVal];
+
+    while(aux != NULL) {
+        if(aux->getKey() == k) {
+            return aux->getValue();
+        }
+        aux = aux->getNext();
+    }
+
+    return -1;
+}
+
+template<class K, class V, class F>
+int HashMap<K, V, F>::getNrOfKeys() {
+    int nr = 0;
+    const int size = 111;
+    for(int i = 0; i < size; i++) {
+        if(_M[i] != NULL) {
+            nr++;
+        }
+    }
+
+    return nr - 1;
+}
+
+template<class K, class V, class F>
+vector<V> HashMap<K, V, F>::getVals(const K& k) {
+    unsigned long funcVal = _F(k);
+    HashNode<K, V> *aux = _M[funcVal];
+    vector<V> v;
+
+    while(aux != NULL) {
+        if(aux->getKey() == k) {
+            v.push_back(aux->getValue());
+        }
+        aux = aux->getNext();
+    }
+
+    return v;
+}
+
+template<class K, class V, class F>
+ostream& operator<<(ostream& out, const HashMap<K, V, F>& x) {
+    const int size = 111;
+    for(int i = 0; i < size; i++) {
+        HashNode<K, V> *aux = x._M[i];
+        while(aux != NULL) {
+            out << aux->getKey() << ' ' << aux->getValue() << endl;
+            aux = aux->getNext();
+        }
+    }
+}
 
 template class HashMap<int, int, KeyHash<int> >;
