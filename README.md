@@ -2,7 +2,7 @@
 
 HashMap <class K, class V, class F>
 
-Implement a template class for HashMap (type for keys, type for values, dispersion function). In case of collision, 
+Implements a template class for HashMap (type for keys, type for values, dispersion function). In case of collision, 
 the HashMap will store the values in a linked list. The Class should have the following features:
 
 	- Constructor without parameters which initiates and empty HashMap
